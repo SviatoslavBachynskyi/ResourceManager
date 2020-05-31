@@ -1,7 +1,7 @@
-CREATE DATABASE ResourceManager2;
+CREATE DATABASE ResourceManager3;
 GO
 
-USE ResourceManager2;
+USE ResourceManager3;
 
 CREATE TABLE Countries
 	(
