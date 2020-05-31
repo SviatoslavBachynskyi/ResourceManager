@@ -113,6 +113,16 @@ CREATE TABLE Suppliers
 	CityId INTEGER NOT NULL);
 GO
 
+CREATE TABLE Supplies
+	(
+	SupplyId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	WayBillNumber VARCHAR(30) NULL UNIQUE,
+	Quantity INTEGER NOT NULL,
+	ArrivalDate   DATE NOT NULL,
+	AcceptedById INTEGER NOT NULL
+	);
+GO
+
 CREATE TABLE OrderStatuses
 	(
 	OrderStatusId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -123,7 +133,7 @@ GO
 CREATE TABLE Orders
     (
     OrderId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
-	WayBillNumber VARCHAR(30) NULL UNIQUE,
+	SupplyId INTEGER NULL,
 	OrderPrice NUMERIC (18,2) NULL,
 	OrderDate DATETIME NOT NULL,
 	ShipmentPrice NUMERIC (18,2) NULL,
@@ -143,23 +153,13 @@ CREATE TABLE OrderItems
 	OrderId INTEGER NOT NULL);
 GO
 
-CREATE TABLE SupplyItems
-	(
-	SupplyItemId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
-	OrderItemId INTEGER NOT NULL,
-	InventoryId INTEGER NOT NULL,
-	Quantity INTEGER NOT NULL,
-	ArrivalDate   DATE NOT NULL,
-	AcceptedById INTEGER NOT NULL
-	);
-GO
-
 CREATE TABLE Inventory
 	(
 	InventoryId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	InventoryNum VARCHAR(30) NOT NULL UNIQUE,
 	WareHouseId INTEGER NOT NULL,
 	ResourceId INTEGER NOT NULL,
+	OrderItemId INTEGER NOT NULL,
 	Quantity INTEGER NOT NULL,
 	);
 GO
@@ -243,6 +243,12 @@ ALTER TABLE Resources
 ON DELETE NO ACTION;
 GO
 
+ALTER TABLE Supplies
+    ADD CONSTRAINT Supplies_Workers_FK FOREIGN KEY (AcceptedById)
+        REFERENCES Workers (WorkerId)
+ON DELETE NO ACTION;
+GO
+
 ALTER TABLE Orders
     ADD CONSTRAINT Workers_OrderedBy_FK FOREIGN KEY (OrderedById)
         REFERENCES Workers (WorkerId)
@@ -252,6 +258,12 @@ GO
 ALTER TABLE Orders
     ADD CONSTRAINT Orders_OrderStatuses_FK FOREIGN KEY (OrderStatusId)
         REFERENCES OrderStatuses (OrderStatusId)
+ON DELETE NO ACTION;
+GO
+
+ALTER TABLE Orders
+    ADD CONSTRAINT Orders_Supplies_FK FOREIGN KEY (SupplyId)
+        REFERENCES Supplies (SupplyId)
 ON DELETE NO ACTION;
 GO
 
@@ -273,19 +285,6 @@ ALTER TABLE OrderItems
 ON DELETE NO ACTION;
 GO
 
-ALTER TABLE SupplyItems
-    ADD CONSTRAINT SupplyItems_OrderItems_FK FOREIGN KEY (OrderItemId)
-        REFERENCES OrderItems (OrderItemId)
-ON DELETE NO ACTION;
-GO
-
-
-ALTER TABLE SupplyItems
-    ADD CONSTRAINT SupplyItems_Workers_FK FOREIGN KEY (AcceptedById)
-        REFERENCES Workers (WorkerId)
-ON DELETE NO ACTION;
-GO
-
 ALTER TABLE Inventory
     ADD CONSTRAINT Inventory_Warehouses_FK FOREIGN KEY (WarehouseId)
         REFERENCES Warehouses (WarehouseId)
@@ -298,9 +297,9 @@ ALTER TABLE Inventory
 ON DELETE NO ACTION;
 GO
 
-ALTER TABLE SupplyItems
-    ADD CONSTRAINT SupplyItems_Inventory_FK FOREIGN KEY (InventoryId)
-        REFERENCES Inventory (InventoryId)
+ALTER TABLE Inventory
+    ADD CONSTRAINT Inventory_OrderItems_FK FOREIGN KEY (OrderItemId)
+        REFERENCES OrderItems (OrderItemId)
 ON DELETE NO ACTION;
 GO
 
