@@ -5,14 +5,14 @@ USE ResourceManager3;
 
 CREATE TABLE Countries
 	(
-	CountryId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL
 	);
 GO
 
 CREATE TABLE Districts
 	(
-	DistrictId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL,
 	CountryId INTEGER NOT NULL
 	);
@@ -20,7 +20,7 @@ GO
 
 CREATE TABLE Cities
 	(
-	CityId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL,
 	DistrictId INTEGER NOT NULL
 	);
@@ -28,35 +28,35 @@ GO
 
 CREATE TABLE MeasuringUnits 
     (
-    MeasuringUnitId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
     Name              NVARCHAR(50) NOT NULL
 	); 
 GO
 
 CREATE TABLE SafetyClasses
     (
-    SafetyClassId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
     CodeName              NVARCHAR(50) NOT NULL
 	); 
 GO
 
 CREATE TABLE EcologyClasses
     (
-    EcologyClassId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
     CodeName              NVARCHAR(50) NOT NULL
 	); 
 GO
 
 CREATE TABLE ResourceCategories
 	(
-	ResourceCategoryId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL
 	);
 GO
 
 CREATE TABLE ResourceSubCategories
 	(
-	ResourceSubCategoryId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL,
 	ResourceCategoryId INTEGER NOT NULL
 	);
@@ -64,7 +64,7 @@ GO
 
 CREATE TABLE Resources 
     (
-    ResourceId        INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id        INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(100) NOT NULL,
     ResourceSubCategoryId INTEGER NULL,
 	MeasuringUnitId INTEGER NOT NULL,
@@ -78,13 +78,13 @@ GO
 
 CREATE TABLE Posts 
     (
-    PostId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
     Name     nvarchar (50) NOT NULL );
 GO
 
 CREATE TABLE Workers 
     (
-    WorkerId    INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id    INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
     FirstName NVARCHAR(50) NOT NULL, 
     FatherName NVARCHAR(50), 
     LastName NVARCHAR(50) NOT NULL,
@@ -95,7 +95,7 @@ GO
 
 CREATE TABLE Warehouses
 	(
-	WarehouseId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	WarehouseNumber INTEGER NOT NULL,
 	Volume NUMERIC(18,3) NULL,
 	CityId INTEGER NOT NULL,
@@ -106,7 +106,7 @@ GO
 
 CREATE TABLE Suppliers 
     (
-    SupplierId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
     Name         NVARCHAR(100) NOT NULL , 
     Address NVARCHAR(200) NOT NULL,
 	Contact NVARCHAR(200) NOT NULL,
@@ -115,7 +115,7 @@ GO
 
 CREATE TABLE Supplies
 	(
-	SupplyId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	WayBillNumber VARCHAR(30) NULL UNIQUE,
 	Quantity INTEGER NOT NULL,
 	ArrivalDate   DATE NOT NULL,
@@ -125,14 +125,14 @@ GO
 
 CREATE TABLE OrderStatuses
 	(
-	OrderStatusId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50)
 	);
 GO
 
 CREATE TABLE Orders
     (
-    OrderId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	SupplyId INTEGER NULL,
 	OrderPrice NUMERIC (18,2) NULL,
 	OrderDate DATETIME NOT NULL,
@@ -146,7 +146,7 @@ GO
 
 CREATE TABLE OrderItems
     (
-    OrderItemId   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ResourceId INTEGER NOT NULL,
 	UnitPrice NUMERIC (18,2) NOT NULL,
 	Quantity INTEGER NOT NULL,
@@ -155,7 +155,7 @@ GO
 
 CREATE TABLE Inventory
 	(
-	InventoryId INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	InventoryNum VARCHAR(30) NOT NULL UNIQUE,
 	WareHouseId INTEGER NOT NULL,
 	ResourceId INTEGER NOT NULL,
@@ -166,7 +166,7 @@ GO
 
 CREATE TABLE InventoryGivings
 	(
-	InventoryGivingId INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
+	Id INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	DateTime DATETIME NOT NULL,
 	TakenById INTEGER NOT NULL,
 	ApprovedById INTEGER NOT NULL,
@@ -178,145 +178,145 @@ GO
 
 ALTER TABLE Warehouses
     ADD CONSTRAINT Warehouses_Cites_FK FOREIGN KEY (CityId)
-        REFERENCES Cities (CityId)
+        REFERENCES Cities (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Suppliers
     ADD CONSTRAINT Suppliers_Cites_FK FOREIGN KEY (CityId)
-        REFERENCES Cities (CityId)
+        REFERENCES Cities (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Workers
     ADD CONSTRAINT Workers_Cities_FK FOREIGN KEY (CityId)
-        REFERENCES Cities (CityId)
+        REFERENCES Cities (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Workers
     ADD CONSTRAINT Workers_Posts_FK FOREIGN KEY (PostId)
-        REFERENCES Posts (PostId)
+        REFERENCES Posts (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Districts
 	ADD CONSTRAINT Districts_Countries_FK FOREIGN KEY (CountryId)
-		REFERENCES Countries (CountryId)
+		REFERENCES Countries (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Cities
 	ADD CONSTRAINT Cities_Districts_FK FOREIGN KEY (DistrictId)
-		REFERENCES Districts (DistrictId)
+		REFERENCES Districts (Id)
 ON DELETE NO ACTION;
 GO
 
 
 ALTER TABLE ResourceSubCategories
     ADD CONSTRAINT ResourceSubCategories_ResourceCategories_FK FOREIGN KEY (ResourceCategoryId)
-        REFERENCES ResourceCategories (ResourceCategoryId)
+        REFERENCES ResourceCategories (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Resources
     ADD CONSTRAINT Resource_ResourceSubCategories_FK FOREIGN KEY (ResourceSubCategoryId)
-        REFERENCES ResourceSubCategories (ResourceSubCategoryId)
+        REFERENCES ResourceSubCategories (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Resources
     ADD CONSTRAINT Resources_MeasuringUnits_FK FOREIGN KEY (MeasuringUnitId)
-        REFERENCES MeasuringUnits (MeasuringUnitId)
+        REFERENCES MeasuringUnits (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Resources
     ADD CONSTRAINT Resources_SafetyClasses_FK FOREIGN KEY (SafetyClassId)
-        REFERENCES SafetyClasses (SafetyClassId)
+        REFERENCES SafetyClasses (Id)
 ON DELETE NO ACTION;
 GO
  
 ALTER TABLE Resources
     ADD CONSTRAINT Resources_EcologyClasses_FK FOREIGN KEY (EcologyClassId)
-        REFERENCES EcologyClasses (EcologyClassId)
+        REFERENCES EcologyClasses (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Supplies
     ADD CONSTRAINT Supplies_Workers_FK FOREIGN KEY (AcceptedById)
-        REFERENCES Workers (WorkerId)
+        REFERENCES Workers (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Orders
     ADD CONSTRAINT Workers_OrderedBy_FK FOREIGN KEY (OrderedById)
-        REFERENCES Workers (WorkerId)
+        REFERENCES Workers (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Orders
     ADD CONSTRAINT Orders_OrderStatuses_FK FOREIGN KEY (OrderStatusId)
-        REFERENCES OrderStatuses (OrderStatusId)
+        REFERENCES OrderStatuses (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Orders
     ADD CONSTRAINT Orders_Supplies_FK FOREIGN KEY (SupplyId)
-        REFERENCES Supplies (SupplyId)
+        REFERENCES Supplies (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Orders
     ADD CONSTRAINT Orders_Suppliers_FK FOREIGN KEY (SupplierId)
-        REFERENCES Suppliers (SupplierId)
+        REFERENCES Suppliers (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE OrderItems
     ADD CONSTRAINT OrderItems_Orders_FK FOREIGN KEY (OrderId)
-        REFERENCES Orders (OrderId)
+        REFERENCES Orders (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE OrderItems
     ADD CONSTRAINT OrderItems_Resources_FK FOREIGN KEY (ResourceId)
-        REFERENCES Resources (ResourceId)
+        REFERENCES Resources (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Inventory
     ADD CONSTRAINT Inventory_Warehouses_FK FOREIGN KEY (WarehouseId)
-        REFERENCES Warehouses (WarehouseId)
+        REFERENCES Warehouses (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Inventory
     ADD CONSTRAINT Inventory_Resources_FK FOREIGN KEY (ResourceId)
-        REFERENCES Resources (ResourceId)
+        REFERENCES Resources (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Inventory
     ADD CONSTRAINT Inventory_OrderItems_FK FOREIGN KEY (OrderItemId)
-        REFERENCES OrderItems (OrderItemId)
+        REFERENCES OrderItems (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE InventoryGivings
     ADD CONSTRAINT InventoryGivings_Inventory_FK FOREIGN KEY (InventoryId)
-        REFERENCES Inventory (InventoryId)
+        REFERENCES Inventory (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE InventoryGivings
     ADD CONSTRAINT InventoryGivings_ToWhom_FK FOREIGN KEY (TakenById)
-        REFERENCES Workers (WorkerId)
+        REFERENCES Workers (Id)
 ON DELETE NO ACTION;
 GO
 
 ALTER TABLE InventoryGivings
     ADD CONSTRAINT InventoryGivings_ApprovedBy_FK FOREIGN KEY (ApprovedById)
-        REFERENCES Workers (WorkerId)
+        REFERENCES Workers (Id)
 ON DELETE NO ACTION;
 GO
