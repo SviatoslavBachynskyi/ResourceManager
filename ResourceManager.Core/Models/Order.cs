@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ResourceManager.Core.Models
 {
-    public class Order
+    public class Order : IEntity<int>
     {
         public int Id { get; set; }
 

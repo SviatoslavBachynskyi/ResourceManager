@@ -2,7 +2,7 @@
 
 namespace ResourceManager.Core.Models
 {
-    public class InventoryGiving
+    public class InventoryGiving : IEntity<int>
     {
         public int Id { get; set; }
 

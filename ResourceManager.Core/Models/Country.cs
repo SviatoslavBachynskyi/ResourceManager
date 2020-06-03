@@ -2,7 +2,7 @@
 
 namespace ResourceManager.Core.Models
 {
-    public class Country
+    public class Country : IEntity<int>
     {
         public int Id { get; set; }
 

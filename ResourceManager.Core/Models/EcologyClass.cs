@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class EcologyClass
+    public class EcologyClass : IEntity<int>
     {
         public int Id { get; set; }
 

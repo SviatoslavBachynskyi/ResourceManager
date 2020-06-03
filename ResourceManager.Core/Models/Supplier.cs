@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class Supplier
+    public class Supplier : IEntity<int>
     {
         public int Id { get; set; }
 

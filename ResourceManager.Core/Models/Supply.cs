@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ResourceManager.Core.Models
 {
-    public class Supply
+    public class Supply : IEntity<int>
     {
         public int Id { get; set; }
 

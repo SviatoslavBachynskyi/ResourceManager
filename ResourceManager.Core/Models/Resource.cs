@@ -2,7 +2,7 @@
 
 namespace ResourceManager.Core.Models
 {
-    public class Resource
+    public class Resource : IEntity<int>
     {
         public int Id { get; set; }
 

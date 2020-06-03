@@ -2,7 +2,7 @@
 
 namespace ResourceManager.Core.Models
 {
-    public class District
+    public class District : IEntity<int>
     {
         public int Id { get; set; }
 

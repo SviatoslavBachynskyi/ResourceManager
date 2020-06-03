@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class Worker
+    public class Worker : IEntity<int>
     {
         public int Id { get; set; }
 

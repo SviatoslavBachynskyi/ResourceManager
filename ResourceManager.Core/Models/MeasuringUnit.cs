@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class MeasuringUnit
+    public class MeasuringUnit : IEntity<int>
     {
         public int Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class Warehouse
+    public class Warehouse : IEntity<int>
     {
         public int Id { get; set; }
         

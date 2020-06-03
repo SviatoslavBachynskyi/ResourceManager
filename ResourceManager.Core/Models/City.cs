@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class City
+    public class City : IEntity<int>
     {
         public int Id { get; set; }
 

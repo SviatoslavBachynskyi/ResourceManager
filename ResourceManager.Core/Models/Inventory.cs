@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class Inventory
+    public class Inventory : IEntity<int>
     {
         public int Id { get; set; }
 

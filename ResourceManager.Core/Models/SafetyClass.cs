@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class SafetyClass
+    public class SafetyClass : IEntity<int>
     {
         public int Id { get; set; }
 

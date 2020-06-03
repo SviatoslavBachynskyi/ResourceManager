@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class OrderItem
+    public class OrderItem : IEntity<int>
     {
         public int Id { get; set; }
 

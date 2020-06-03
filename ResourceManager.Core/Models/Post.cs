@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class Post
+    public class Post : IEntity<int>
     {
         public int Id { get; set; }
 

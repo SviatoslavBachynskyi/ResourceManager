@@ -1,6 +1,6 @@
 ﻿namespace ResourceManager.Core.Models
 {
-    public class ResourceSubCategory
+    public class ResourceSubCategory : IEntity<int>
     {
         public int Id { get; set; }
 
