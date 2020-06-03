@@ -6,11 +6,6 @@ namespace ResourceManager.Dal
 {
     public class ResourceManagerContext : DbContext
     {
-        public ResourceManagerContext()
-        {
-
-        }
-
         public ResourceManagerContext(DbContextOptions<ResourceManagerContext> options)
             : base(options)
         {
@@ -57,16 +52,12 @@ namespace ResourceManager.Dal
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-FNNF1M3;Initial Catalog=ResourceManager3; Integrated Security=True;");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new CityConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
