@@ -1,0 +1,31 @@
+﻿@page "/"
+@model IndexModel
+@{
+    ViewData["Title"] = "Ресурси";
+}
+
+<table class="table table-striped table-bordered text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" class="align-middle">Назва</th>
+            <th scope="col" class="align-middle">Одиниці вимірювання</th>
+            <th scope="col" class="align-middle">Категорія</th>
+            <th scope="col" class="align-middle">Підкатегорія</th>
+            <th scope="col" class="align-middle">Клас безпеки</th>
+            <th scope="col" class="align-middle">Клас екологічності</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var resource in Model.Resources)
+        {
+            <tr>
+                <td class="align-middle">@resource.Name</td>
+                <td class="align-middle">@resource.MeasuringUnit</td>
+                <td class="align-middle">@resource.Category</td>
+                <td class="align-middle">@resource.SubCategory</td>
+                <td class="align-middle">@resource.SafetyClass</td>
+                <td class="align-middle">@resource.EcologyClass</td>
+            </tr>
+        }
+    </tbody>
+</table>
