@@ -4,6 +4,104 @@
     ViewData["Title"] = "Ресурси";
 }
 
+<div class="card">
+    <h5 class="card-header"><b>Фільтрування</b></h5>
+
+    <div class="card-body">
+        <form method="get">
+
+            <div class="row">
+                <div class="col">
+                    <label asp-for="Filter.SearchText" class="control-label"><b>Текст для пошуку:</b></label>
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control" asp-for="Filter.SearchText" placeholder="Пошук">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label asp-for="Filter.CategoryId" class="control-label"><b>Категорія:</b></label>
+                    <div class="input-group mb-3">
+                        <select asp-for="Filter.CategoryId" class="form-control" asp-items="Model.Categories">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label asp-for="Filter.EcologyClassId" class="control-label"><b>Клас екологічності:</b></label>
+                    <div class="input-group mb-3">
+                        <select asp-for="Filter.EcologyClassId" class="form-control" asp-items="Model.EcologyClasses">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label asp-for="Filter.MeasuringUnitId" class="control-label"><b>Одиниці вимірювання:</b></label>
+                    <div class="input-group mb-3">
+                        <select asp-for="Filter.MeasuringUnitId" class="form-control" asp-items="Model.MeasuringUnits">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label asp-for="Filter.SubCategoryId" class="control-label"><b>Підкатегорія:</b></label>
+                    <div class="input-group mb-3">
+                        <select asp-for="Filter.SubCategoryId" class="form-control" asp-items="Model.SubCategories" disabled>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label asp-for="Filter.SafetyClassId" class="control-label"><b>Клас безпеки:</b></label>
+                    <div class="input-group mb-3">
+                        <select asp-for="Filter.SafetyClassId" class="form-control" asp-items="Model.SafetyClasses">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary float-right">Фільтрувати</button>
+
+            @section scripts{
+                <script>
+                    if (!$("#Filter_CategoryId").val()) {
+                        $("#Filter_SubCategoryId").prop("disabled", true);
+                    } else {
+                        $("#Filter_SubCategoryId").prop("disabled", false)
+                    }
+
+                    $(function () {
+                        $("#Filter_CategoryId").on("change", function () {
+                            let categoryId = $(this).val();
+                            $("#Filter_SubCategoryId").empty();
+                            $("#Filter_SubCategoryId").append("<option value=''></option>");
+                            if (!categoryId) {
+                                $("#Filter_SubCategoryId").prop("disabled", true);
+                                return;
+                            }
+                            $("#Filter_SubCategoryId").prop("disabled", false);
+
+                            $.getJSON(`?handler=SubCategories&CategoryId=${categoryId}`, (data) => {
+                                $.each(data, function (i, item) {
+                                    $("#Filter_SubCategoryId").append(`<option value="${item.id}">${item.name}</option>`);
+                                });
+                            });
+                        });
+                    });
+                </script>
+            }
+
+        </form>
+    </div>
+
+</div>
+
 <table class="table table-striped table-bordered text-center">
     <thead class="thead-dark">
         <tr>

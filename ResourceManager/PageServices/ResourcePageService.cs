@@ -1,26 +1,86 @@
 ﻿using AutoMapper;
+using ResourceManager.Core.Dtos.FilterDtos;
 using ResourceManager.Core.Services;
 using ResourceManager.ViewModels;
+using ResourceManager.ViewModels.FilterViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using ResourceManager.ViewModels.SelectViewModels;
 
 namespace ResourceManager.PageServices
 {
     public class ResourcePageService : IResourcePageService
     {
-        private IResourceService _resourceService;
-        private IMapper _mapper;
-        public ResourcePageService(IResourceService resourceService, IMapper mapper)
+        private readonly IResourceService _resourceService;
+        private readonly IMeasuringUnitService _measuringUnitService;
+        private readonly IResourceCategoryService _resourceCategoryService;
+        private readonly IResourceSubCategoryService _resourceSubCategoryService;
+        private readonly ISafetyClassService _safetyClassService;
+        private readonly IEcologyClassService _ecologyClassService;
+
+        private readonly IMapper _mapper;
+        public ResourcePageService(
+            IResourceService resourceService,
+            IMeasuringUnitService measuringUnitService,
+            IResourceCategoryService resourceCategoryService,
+            IResourceSubCategoryService resourceSubCategoryService,
+            ISafetyClassService safetyClassService,
+            IEcologyClassService ecologyClassService,
+            IMapper mapper)
         {
             this._resourceService = resourceService;
+            this._measuringUnitService = measuringUnitService;
+            this._resourceCategoryService = resourceCategoryService;
+            this._resourceSubCategoryService = resourceSubCategoryService;
+            this._safetyClassService = safetyClassService;
+            this._ecologyClassService = ecologyClassService;
+
             this._mapper = mapper;
         }
 
-        public async Task<IEnumerable<ResourceViewModel>> GetAllAsync()
+        public async Task<IEnumerable<ResourceViewModel>> GetAllAsync(ResourceFilterViewModel resourceFilter = null)
         {
-            var resources = await this._resourceService.GetAllAsync();
+            var filter = this._mapper.Map<ResourceFilterDto>(resourceFilter);
+
+            var resources = await this._resourceService.GetAllAsync(filter);
 
             return this._mapper.Map<IEnumerable<ResourceViewModel>>(resources);
+        }
+
+        public async Task<IEnumerable<MeasuringUnitSelectViewModel>> GetMeasuringUnitsAsync()
+        {
+            var units = await this._measuringUnitService.GetAllAsync();
+
+            return this._mapper.Map<IEnumerable<MeasuringUnitSelectViewModel>>(units);
+        }
+
+        public async Task<IEnumerable<ResourceCategorySelectViewModel>> GetCategoriesAsync()
+        {
+            var categories = await this._resourceCategoryService.GetAllAsync();
+
+            return this._mapper.Map<IEnumerable<ResourceCategorySelectViewModel>>(categories);
+        }
+
+        public async Task<IEnumerable<ResourceSubCategorySelectViewModel>> GetSubCategoriesAsync(int ResourceCategoryId)
+        {
+            var subCategories = await this._resourceSubCategoryService.GetAllAsync(ResourceCategoryId);
+
+            return this._mapper.Map<IEnumerable<ResourceSubCategorySelectViewModel>>(subCategories);
+        }
+
+        public async Task<IEnumerable<SafetyClassSelectViewModel>> GetSafetyClassesAsync()
+        {
+            var classes = await this._safetyClassService.GetAllAsync();
+            
+            return this._mapper.Map<IEnumerable<SafetyClassSelectViewModel>>(classes);
+        }
+
+        public async Task<IEnumerable<EcologyClassSelectViewModel>> GetEcologyClassesAsync()
+        {
+            var classes = await this._ecologyClassService.GetAllAsync();
+
+            return this._mapper.Map<IEnumerable<EcologyClassSelectViewModel>>(classes);
         }
     }
 }

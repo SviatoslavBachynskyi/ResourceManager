@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace ResourceManager.Core.Services
 {
-    public interface IResourceService
+    public interface IEcologyClassService
     {
-        public Task<IEnumerable<ResourceDto>> GetAllAsync(ResourceFilterDto resourceFilter = null);
+        public Task<IEnumerable<EcologyClassDto>> GetAllAsync();
     }
 }
