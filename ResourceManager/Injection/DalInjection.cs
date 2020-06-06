@@ -10,20 +10,26 @@ namespace ResourceManager.Injection
 {
     internal static class DalInjection
     {
-        internal static void InjectDal(this IServiceCollection services, IConfiguration configuration)
+        internal static IServiceCollection AddDal(this IServiceCollection services, IConfiguration configuration)
         {
-            services.InjectContext(configuration);
+            services.AddContext(configuration);
 
-            services.InjectRepositories(configuration);
+            services.AddRepositories(configuration);
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            return services;
         }
-        private static void InjectContext(this IServiceCollection services, IConfiguration configuration)
+
+        private static IServiceCollection AddContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ResourceManagerContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            return services;
         }
-        private static void InjectRepositories(this IServiceCollection services, IConfiguration configuration)
+
+        private static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
@@ -44,6 +50,8 @@ namespace ResourceManager.Injection
             services.AddScoped<ISupplyRepository, SupplyRepository>();
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<IWorkerRepository, WorkerRepository>();
+
+            return services;
         }
     }
 }
