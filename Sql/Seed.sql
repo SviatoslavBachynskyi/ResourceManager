@@ -1,4 +1,4 @@
-﻿USE ResourceManager2;
+﻿USE ResourceManager3;
 
 INSERT INTO Posts(Name) VALUES
 ('Завгосп')
@@ -173,116 +173,116 @@ INSERT INTO ResourceCategories(Name) VALUES
 ,('Витратні матеріали')
 GO
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Природнього походження', ResourceCategoryId  FROM ResourceCategories WHERE Name='Будівельні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Природнього походження', Id  FROM ResourceCategories WHERE Name='Будівельні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Метал', ResourceCategoryId  FROM ResourceCategories WHERE Name='Будівельні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Метал', Id  FROM ResourceCategories WHERE Name='Будівельні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'В''яжучі речовини', ResourceCategoryId  FROM ResourceCategories WHERE Name='Будівельні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'В''яжучі речовини', Id  FROM ResourceCategories WHERE Name='Будівельні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Камінні', ResourceCategoryId  FROM ResourceCategories WHERE Name='Будівельні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Камінні', Id  FROM ResourceCategories WHERE Name='Будівельні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Розчини', ResourceCategoryId  FROM ResourceCategories WHERE Name='Будівельні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Розчини', Id  FROM ResourceCategories WHERE Name='Будівельні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Спеціальні будматеріали', ResourceCategoryId  FROM ResourceCategories WHERE Name='Будівельні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Спеціальні будматеріали', Id  FROM ResourceCategories WHERE Name='Будівельні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Для прибирання', ResourceCategoryId  FROM ResourceCategories WHERE Name='Інструменти';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Для прибирання', Id  FROM ResourceCategories WHERE Name='Інструменти';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Загального призначення', ResourceCategoryId  FROM ResourceCategories WHERE Name='Інструменти'
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Загального призначення', Id  FROM ResourceCategories WHERE Name='Інструменти'
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Для ремонту', ResourceCategoryId  FROM ResourceCategories WHERE Name='Інструменти';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Для ремонту', Id  FROM ResourceCategories WHERE Name='Інструменти';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Канцтовари', ResourceCategoryId  FROM ResourceCategories WHERE Name='Витратні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Канцтовари', Id  FROM ResourceCategories WHERE Name='Витратні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Паливо', ResourceCategoryId  FROM ResourceCategories WHERE Name='Витратні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Паливо', Id  FROM ResourceCategories WHERE Name='Витратні матеріали';
 
-INSERT INTO ResourceSubCategories(Name, ResourceCategories_ResourceCategoryId)
-SELECT 'Сировина', ResourceCategoryId  FROM ResourceCategories WHERE Name='Витратні матеріали';
+INSERT INTO ResourceSubCategories(Name, ResourceCategoryId)
+SELECT 'Сировина', Id  FROM ResourceCategories WHERE Name='Витратні матеріали';
 GO
 
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, NeedLicense, ResourceSubCategories_ResourceSubCategoryId)
-SELECT 'Лопата', MeasuringUnitId, 0, ResourceSubCategoryId FROM MeasuringUnits mu, ResourceSubCategories rsc
+INSERT INTO Resources(Name, MeasuringUnitId, NeedLicense, ResourceSubCategoryId)
+SELECT 'Лопата', mu.Id, 0, rsc.Id FROM MeasuringUnits mu, ResourceSubCategories rsc
 WHERE mu.Name = 'Штуки' AND rsc.Name = 'Загального призначення';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, NeedLicense, ResourceSubCategories_ResourceSubCategoryId)
-SELECT 'Мітла', MeasuringUnitId, 0, ResourceSubCategoryId FROM MeasuringUnits mu, ResourceSubCategories rsc
+INSERT INTO Resources(Name, MeasuringUnitId, NeedLicense, ResourceSubCategoryId)
+SELECT 'Мітла', mu.Id, 0, rsc.Id FROM MeasuringUnits mu, ResourceSubCategories rsc
 WHERE mu.Name = 'Штуки' AND rsc.Name = 'Для прибирання';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, NeedLicense, ResourceSubCategories_ResourceSubCategoryId)
-SELECT 'Упаковка Паперу А4 500шт', MeasuringUnitId, 0, ResourceSubCategoryId FROM MeasuringUnits mu, ResourceSubCategories rsc
+INSERT INTO Resources(Name, MeasuringUnitId, NeedLicense, ResourceSubCategoryId)
+SELECT 'Упаковка Паперу А4 500шт', mu.Id, 0, rsc.Id FROM MeasuringUnits mu, ResourceSubCategories rsc
 WHERE mu.Name = 'Штуки' AND rsc.Name = 'Канцтовари';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, NeedLicense, ResourceSubCategories_ResourceSubCategoryId)
-SELECT 'Картирдж для принтера', MeasuringUnitId, 0, ResourceSubCategoryId FROM MeasuringUnits mu, ResourceSubCategories rsc
+INSERT INTO Resources(Name, MeasuringUnitId, NeedLicense, ResourceSubCategoryId)
+SELECT 'Картирдж для принтера', mu.Id, 0, rsc.Id FROM MeasuringUnits mu, ResourceSubCategories rsc
 WHERE mu.Name = 'Штуки' AND rsc.Name = 'Канцтовари';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, NeedLicense, ResourceSubCategories_ResourceSubCategoryId)
-SELECT 'Кулькова ручка', MeasuringUnitId, 0, ResourceSubCategoryId FROM MeasuringUnits mu, ResourceSubCategories rsc
+INSERT INTO Resources(Name, MeasuringUnitId, NeedLicense, ResourceSubCategoryId)
+SELECT 'Кулькова ручка', mu.Id, 0, rsc.Id FROM MeasuringUnits mu, ResourceSubCategories rsc
 WHERE mu.Name = 'Штуки' AND rsc.Name = 'Канцтовари';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Біла фарба', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Біла фарба', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Літри' AND rsc.Name = 'Спеціальні будматеріали' AND EC.CodeName='II' AND SC.CodeName='T';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Клей', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Клей', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Літри' AND rsc.Name = 'В''яжучі речовини' AND EC.CodeName='II' AND SC.CodeName='T';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Бензин А-95', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Бензин А-95', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Літри' AND rsc.Name = 'Паливо' AND EC.CodeName='II' AND SC.CodeName='F+';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, SafetyClasses_SafetyClassId)
-SELECT 'Дрова', MeasuringUnitId, ResourceSubCategoryId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, SafetyClassId)
+SELECT 'Дрова', mu.Id, rsc.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, SafetyClasses SC
 WHERE mu.Name = N'м³' AND rsc.Name = 'Паливо' AND SC.CodeName='F';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, SafetyClasses_SafetyClassId)
-SELECT 'Вугілля', MeasuringUnitId, ResourceSubCategoryId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, SafetyClassId)
+SELECT 'Вугілля', mu.Id, rsc.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, SafetyClasses SC
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Паливо' AND SC.CodeName='F';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Сірка', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Сірка', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Сировина' AND EC.CodeName='III' AND SC.CodeName='E';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, NeedLicense, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Фосфор', MeasuringUnitId, 1, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, NeedLicense, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Фосфор', mu.Id, 1, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Сировина' AND EC.CodeName='I' AND SC.CodeName='C';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Натрій', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Натрій', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Сировина' AND EC.CodeName='I' AND SC.CodeName='C';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Магній', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Магній', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Сировина' AND EC.CodeName='I' AND SC.CodeName='C';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId, EcologyClasses_EcologyClassId, SafetyClasses_SafetyClassId)
-SELECT 'Асбест', MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId, EcologyClassId, SafetyClassId)
+SELECT 'Асбест', mu.Id, rsc.Id, EC.Id, SC.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc, EcologyClasses EC, SafetyClasses SC
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Сировина' AND EC.CodeName='I' AND SC.CodeName='C';
 
-INSERT INTO Resources(Name, MeasuringUnits_MeasuringUnitId, ResourceSubCategories_ResourceSubCategoryId)
-SELECT 'Залізна руда', MeasuringUnitId, ResourceSubCategoryId
+INSERT INTO Resources(Name, MeasuringUnitId, ResourceSubCategoryId)
+SELECT 'Залізна руда', mu.Id, rsc.Id
 FROM MeasuringUnits mu, ResourceSubCategories rsc
 WHERE mu.Name = 'Кілограми' AND rsc.Name = 'Сировина';
 GO
