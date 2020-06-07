@@ -8,7 +8,7 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<InventoryGiving> builder)
         {
-            builder.Property(e => e.DateTime).HasColumnType("datetime");
+            builder.Property(e => e.RequestDate).HasColumnType("datetime");
 
             builder.Property(e => e.Description).HasMaxLength(1000);
 
@@ -17,6 +17,12 @@ namespace ResourceManager.Dal.EntityConfigurations
                 .HasForeignKey(d => d.ApprovedById)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("InventoryGivings_ApprovedBy_FK");
+
+            builder.HasOne(d => d.InventoryGivingStatus)
+                .WithMany()
+                .HasForeignKey(d => d.InventoryGivingStatusId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("InventoryGivings_InventoryGivingStatuses_FK ");
 
             builder.HasOne(d => d.Inventory)
                 .WithMany()

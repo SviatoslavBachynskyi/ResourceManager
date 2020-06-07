@@ -8,6 +8,10 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ResourceSubCategory> builder)
         {
+            builder.HasIndex(e => new { e.Name, e.ResourceCategoryId })
+                .HasName("SubCategoryInCategory_UC")
+                .IsUnique();
+
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);

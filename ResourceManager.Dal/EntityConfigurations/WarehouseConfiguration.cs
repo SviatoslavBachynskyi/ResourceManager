@@ -9,7 +9,7 @@ namespace ResourceManager.Dal.EntityConfigurations
         public void Configure(EntityTypeBuilder<Warehouse> builder)
         {
             builder.HasIndex(e => new { e.WarehouseNumber, e.CityId })
-                .HasName("CityNumber")
+                .HasName("CityNumber_UC")
                 .IsUnique();
 
             builder.Property(e => e.Address).HasMaxLength(200);

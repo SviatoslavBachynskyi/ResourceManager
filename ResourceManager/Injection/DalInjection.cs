@@ -35,6 +35,7 @@ namespace ResourceManager.Injection
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IEcologyClassRepository, EcologyClassRepository>();
+            services.AddScoped<IInventoryGivingStatusRepository, InventoryGivingStatusRepository>();
             services.AddScoped<IInventoryGivingRepository, InventoryGivingRepository>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();
             services.AddScoped<IMeasuringUnitRepository, MeasuringUnitRepository>();

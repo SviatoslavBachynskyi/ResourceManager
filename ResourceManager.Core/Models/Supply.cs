@@ -9,8 +9,6 @@ namespace ResourceManager.Core.Models
 
         public string WayBillNumber { get; set; }
 
-        public int Quantity { get; set; }
-
         public DateTime ArrivalDate { get; set; }
 
         public int AcceptedById { get; set; }

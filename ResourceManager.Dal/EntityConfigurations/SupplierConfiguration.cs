@@ -8,6 +8,9 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Supplier> builder)
         {
+            builder.HasIndex(e => e.Name)
+                .IsUnique();
+
             builder.Property(e => e.Address)
                 .IsRequired()
                 .HasMaxLength(200);

@@ -8,6 +8,14 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
+            builder.HasIndex(e => e.OrderNum)
+                .IsUnique();
+
+            builder.Property(e => e.OrderNum)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
             builder.Property(e => e.CompleteDate).HasColumnType("datetime");
 
             builder.Property(e => e.OrderDate).HasColumnType("datetime");
@@ -29,6 +37,12 @@ namespace ResourceManager.Dal.EntityConfigurations
                 .HasForeignKey(d => d.OrderedById)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("Workers_OrderedBy_FK");
+
+            builder.HasOne(d => d.ApprovedBy)
+                .WithMany()
+                .HasForeignKey(d => d.ApprovedById)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("Workers_ApprovedBy_FK");
 
             builder.HasOne(d => d.Supplier)
                 .WithMany()

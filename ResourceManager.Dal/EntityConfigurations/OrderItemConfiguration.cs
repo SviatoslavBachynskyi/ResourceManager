@@ -8,6 +8,10 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
+            builder.HasIndex(e => new { e.ResourceId, e.OrderId })
+                .HasName("ResourceInOrder_UC")
+                .IsUnique();
+
             builder.Property(e => e.UnitPrice).HasColumnType("numeric(18, 2)");
 
             builder.HasOne(d => d.Order)

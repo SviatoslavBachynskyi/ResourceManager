@@ -7,15 +7,17 @@ namespace ResourceManager.Core.Models
     {
         public int Id { get; set; }
 
+        public string OrderNum { get; set; }
+
         public int? SupplyId { get; set; }
 
-        public decimal? OrderPrice { get; set; }
+        public decimal OrderPrice { get; set; }
 
         public DateTime OrderDate { get; set; }
 
-        public decimal? ShipmentPrice { get; set; }
+        public decimal ShipmentPrice { get; set; }
 
-        public decimal? TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public DateTime? CompleteDate { get; set; }
 
@@ -23,11 +25,15 @@ namespace ResourceManager.Core.Models
 
         public int OrderedById { get; set; }
 
+        public int ApprovedById { get; set; }
+
         public int SupplierId { get; set; }
 
         public OrderStatus OrderStatus { get; set; }
 
         public Worker OrderedBy { get; set; }
+
+        public Worker ApprovedBy { get; set; }
 
         public Supplier Supplier { get; set; }
 

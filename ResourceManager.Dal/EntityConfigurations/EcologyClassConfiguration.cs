@@ -8,6 +8,9 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<EcologyClass> builder)
         {
+            builder.HasIndex(e => e.CodeName)
+                .IsUnique();
+
             builder.Property(e => e.CodeName)
                 .IsRequired()
                 .HasMaxLength(50);

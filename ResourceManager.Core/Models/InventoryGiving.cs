@@ -6,9 +6,11 @@ namespace ResourceManager.Core.Models
     {
         public int Id { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime RequestDate { get; set; }
 
         public int TakenById { get; set; }
+
+        public int? InventoryGivingStatusId { get; set; }
 
         public int ApprovedById { get; set; }
 
@@ -17,6 +19,8 @@ namespace ResourceManager.Core.Models
         public int Quantity { get; set; }
 
         public string Description { get; set; }
+
+        public InventoryGivingStatus InventoryGivingStatus { get; set; }
 
         public Worker ApprovedBy { get; set; }
 

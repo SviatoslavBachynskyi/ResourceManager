@@ -4,14 +4,14 @@ using ResourceManager.Core.Models;
 
 namespace ResourceManager.Dal.EntityConfigurations
 {
-    internal class SafetyClassConfiguration : IEntityTypeConfiguration<SafetyClass>
+    internal class InventoryGivingStatusConfiguration : IEntityTypeConfiguration<InventoryGivingStatus>
     {
-        public void Configure(EntityTypeBuilder<SafetyClass> builder)
+        public void Configure(EntityTypeBuilder<InventoryGivingStatus> builder)
         {
-            builder.HasIndex(e => e.CodeName)
+            builder.HasIndex(e => e.Name)
                 .IsUnique();
 
-            builder.Property(e => e.CodeName)
+            builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
         }

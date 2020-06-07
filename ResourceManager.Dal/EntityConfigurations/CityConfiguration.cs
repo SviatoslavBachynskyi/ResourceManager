@@ -8,6 +8,10 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
+            builder.HasIndex(e => new { e.Name, e.DistrictId })
+                .HasName("CityInDistrict_UC")
+                .IsUnique();
+
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);

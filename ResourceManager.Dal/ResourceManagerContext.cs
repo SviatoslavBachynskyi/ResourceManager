@@ -21,6 +21,8 @@ namespace ResourceManager.Dal
 
         public DbSet<Inventory> Inventory { get; set; }
 
+        public DbSet<InventoryGivingStatus> InventoryGivingStatuses { get; set; }
+
         public DbSet<InventoryGiving> InventoryGivings { get; set; }
 
         public DbSet<MeasuringUnit> MeasuringUnits { get; set; }
@@ -63,6 +65,7 @@ namespace ResourceManager.Dal
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new EcologyClassConfiguration());
             modelBuilder.ApplyConfiguration(new InventoryConfiguration());
+            modelBuilder.ApplyConfiguration(new InventoryGivingStatusConfiguration());
             modelBuilder.ApplyConfiguration(new InventoryGivingConfiguration());
             modelBuilder.ApplyConfiguration(new MeasuringUnitConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
