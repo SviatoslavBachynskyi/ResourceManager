@@ -137,7 +137,7 @@ GO
 CREATE TABLE Orders
     (
     Id   INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
-	OrderNum NVARCHAR(20) NOT NULL UNIQUE,
+	OrderNum VARCHAR(20) NOT NULL UNIQUE,
 	SupplyId INTEGER NULL,
 	OrderPrice NUMERIC (18,2) NOT NULL,
 	OrderDate DATETIME NOT NULL,
@@ -326,8 +326,8 @@ ON DELETE NO ACTION;
 GO
 
 ALTER TABLE InventoryGivings
-    ADD CONSTRAINT InventoryGivings_InventoryGivningStatuses_FK FOREIGN KEY (InventoryGivingStatusId)
-        REFERENCES InventoryGivningStatuses (Id)
+    ADD CONSTRAINT InventoryGivings_InventoryGivingStatuses_FK FOREIGN KEY (InventoryGivingStatusId)
+        REFERENCES InventoryGivingStatuses (Id)
 ON DELETE NO ACTION;
 GO
 
