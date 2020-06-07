@@ -8,6 +8,9 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
+            builder.HasIndex(e => e.OrderDate)
+                .HasName("OrdersByOrderDate_IX");
+
             builder.HasIndex(e => e.OrderNum)
                 .IsUnique();
 

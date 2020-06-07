@@ -11,6 +11,12 @@ namespace ResourceManager.Dal.EntityConfigurations
             builder.HasIndex(e => e.InventoryNum)
                 .IsUnique();
 
+            builder.HasIndex(e => e.WareHouseId)
+                .HasName("InventoryInWarehouse_IX");
+
+            builder.HasIndex(e => e.ResourceId)
+                .HasName("InventoryForResource_IX");
+
             builder.Property(e => e.InventoryNum)
                 .IsRequired()
                 .HasMaxLength(30)

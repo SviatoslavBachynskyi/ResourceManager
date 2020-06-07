@@ -14,7 +14,7 @@ CREATE TABLE Districts
 	(
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL,
-	CountryId INTEGER NOT NULL,
+	CountryId INTEGER NOT NULL INDEX DistrictsInCountry_IX NONCLUSTERED,
 	CONSTRAINT DistrictInCountry_UC UNIQUE(Name, CountryId)
 );
 GO
@@ -23,8 +23,8 @@ CREATE TABLE Cities
 	(
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL,
-	DistrictId INTEGER NOT NULL,
-	CONSTRAINT CityInDistrict_UC UNIQUE(Name, DistrictId)
+	DistrictId INTEGER NOT NULL INDEX CitiesInDistrict_IX NONCLUSTERED,
+	CONSTRAINT CitiesInDistrict_UC UNIQUE(Name, DistrictId)
 	);
 GO
 
@@ -60,8 +60,8 @@ CREATE TABLE ResourceSubCategories
 	(
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(50) NOT NULL,
-	ResourceCategoryId INTEGER NOT NULL,
-	CONSTRAINT SubCategoryInCategory_UC UNIQUE(Name, ResourceCategoryId)
+	ResourceCategoryId INTEGER NOT NULL INDEX SubCategoriesInCategory_IX NONCLUSTERED,
+	CONSTRAINT SubCategoriesInCategory_UC UNIQUE(Name, ResourceCategoryId)
 	);
 GO
 
@@ -69,7 +69,7 @@ CREATE TABLE Resources
     (
     Id        INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name NVARCHAR(100) NOT NULL UNIQUE,
-    ResourceSubCategoryId INTEGER NULL,
+    ResourceSubCategoryId INTEGER NULL INDEX ResourcesInSubCategory_IX NONCLUSTERED,
 	MeasuringUnitId INTEGER NOT NULL,
 	Description NVARCHAR(MAX) NULL,
 	SafetyClassId INTEGER NULL,
@@ -140,7 +140,7 @@ CREATE TABLE Orders
 	OrderNum VARCHAR(20) NOT NULL UNIQUE,
 	SupplyId INTEGER NULL,
 	OrderPrice NUMERIC (18,2) NOT NULL,
-	OrderDate DATETIME NOT NULL,
+	OrderDate DATETIME NOT NULL INDEX OrdersByOrderDate_IX NONCLUSTERED,
 	ShipmentPrice NUMERIC (18,2) NOT NULL,
 	TotalPrice NUMERIC (18,2) NOT NULL,
 	CompleteDate DATETIME NULL,
@@ -165,8 +165,8 @@ CREATE TABLE Inventory
 	(
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY(1,1),
 	InventoryNum VARCHAR(30) NOT NULL UNIQUE,
-	WareHouseId INTEGER NOT NULL,
-	ResourceId INTEGER NOT NULL,
+	WareHouseId INTEGER NOT NULL INDEX InventoryInWarehouse_IX NONCLUSTERED,
+	ResourceId INTEGER NOT NULL INDEX InventoryForResource_IX NONCLUSTERED,
 	OrderItemId INTEGER NOT NULL,
 	Quantity INTEGER NOT NULL,
 	);
@@ -183,7 +183,7 @@ CREATE TABLE InventoryGivings
 	(
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
 	InventoryGivingStatusId INTEGER NOT NULL,
-	RequestDate DateTime NOT NULL,
+	RequestDate DateTime NOT NULL INDEX InventoryGivingsByRequestDate_IX NONCLUSTERED,
 	TakenById INTEGER NOT NULL,
 	ApprovedById INTEGER NOT NULL,
 	InventoryId INTEGER NOT NULL,

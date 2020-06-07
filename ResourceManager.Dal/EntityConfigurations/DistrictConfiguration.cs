@@ -12,6 +12,9 @@ namespace ResourceManager.Dal.EntityConfigurations
                 .HasName("DistrictInCountry_UC")
                 .IsUnique();
 
+            builder.HasIndex(e => e.CountryId)
+                .HasName("DistrictsInCountry_IX");
+
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);

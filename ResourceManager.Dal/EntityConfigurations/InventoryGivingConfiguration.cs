@@ -8,6 +8,9 @@ namespace ResourceManager.Dal.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<InventoryGiving> builder)
         {
+            builder.HasIndex(e => e.RequestDate)
+                .HasName("InventoryGivingsByRequestDate_IX");
+
             builder.Property(e => e.RequestDate).HasColumnType("datetime");
 
             builder.Property(e => e.Description).HasMaxLength(1000);

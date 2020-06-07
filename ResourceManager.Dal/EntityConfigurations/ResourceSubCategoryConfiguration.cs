@@ -9,8 +9,11 @@ namespace ResourceManager.Dal.EntityConfigurations
         public void Configure(EntityTypeBuilder<ResourceSubCategory> builder)
         {
             builder.HasIndex(e => new { e.Name, e.ResourceCategoryId })
-                .HasName("SubCategoryInCategory_UC")
+                .HasName("SubCategoriesInCategory_UC")
                 .IsUnique();
+
+            builder.HasIndex(e => e.ResourceCategoryId)
+                .HasName("SubCategoriesInCategory_IX");
 
             builder.Property(e => e.Name)
                 .IsRequired()

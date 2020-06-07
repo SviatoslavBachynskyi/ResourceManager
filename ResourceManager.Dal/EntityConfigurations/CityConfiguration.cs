@@ -9,8 +9,11 @@ namespace ResourceManager.Dal.EntityConfigurations
         public void Configure(EntityTypeBuilder<City> builder)
         {
             builder.HasIndex(e => new { e.Name, e.DistrictId })
-                .HasName("CityInDistrict_UC")
+                .HasName("CitiesInDistrict_UC")
                 .IsUnique();
+
+            builder.HasIndex(e => e.DistrictId)
+                .HasName("CitiesInDistrict_IX");
 
             builder.Property(e => e.Name)
                 .IsRequired()

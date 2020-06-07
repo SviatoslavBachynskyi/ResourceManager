@@ -11,6 +11,9 @@ namespace ResourceManager.Dal.EntityConfigurations
             builder.HasIndex(e => e.Name)
                 .IsUnique();
 
+            builder.HasIndex(e => e.ResourceSubCategoryId)
+                .HasName("ResourcesInSubCategory_IX");
+
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
