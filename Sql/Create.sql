@@ -94,7 +94,8 @@ CREATE TABLE Workers
     LastName NVARCHAR(50) NOT NULL,
 	CityId INTEGER NOT NULL,
 	Address NVARCHAR(200) NULL,
-    PostId INTEGER NOT NULL);
+    PostId INTEGER NOT NULL
+	);
 GO
 
 CREATE TABLE Warehouses
@@ -271,6 +272,12 @@ ON DELETE NO ACTION;
 GO
 
 ALTER TABLE Orders
+    ADD CONSTRAINT Workers_ApprovedBy_FK FOREIGN KEY (ApprovedById)
+        REFERENCES Workers (Id)
+ON DELETE NO ACTION;
+GO
+
+ALTER TABLE Orders
     ADD CONSTRAINT Orders_OrderStatuses_FK FOREIGN KEY (OrderStatusId)
         REFERENCES OrderStatuses (Id)
 ON DELETE NO ACTION;
@@ -315,6 +322,12 @@ GO
 ALTER TABLE Inventory
     ADD CONSTRAINT Inventory_OrderItems_FK FOREIGN KEY (OrderItemId)
         REFERENCES OrderItems (Id)
+ON DELETE NO ACTION;
+GO
+
+ALTER TABLE InventoryGivings
+    ADD CONSTRAINT InventoryGivings_InventoryGivningStatuses_FK FOREIGN KEY (InventoryGivingStatusId)
+        REFERENCES InventoryGivningStatuses (Id)
 ON DELETE NO ACTION;
 GO
 
