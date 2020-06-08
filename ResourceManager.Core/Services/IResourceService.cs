@@ -11,6 +11,8 @@ namespace ResourceManager.Core.Services
 
         public Task<IEnumerable<ResourceDto>> GetAllAsync(ResourceFilterDto resourceFilter = null);
 
+        public Task<int> CreateAsync(ResourceDto resourceDto);
+
         public Task UpdateAsync(ResourceDto resourceDto);
 
         public Task DeleteAsync(int id);

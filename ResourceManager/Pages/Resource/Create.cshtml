@@ -1,10 +1,10 @@
 ﻿@page
-@model ResourceManager.EditModel
+@model ResourceManager.CreateModel
 @{
-    ViewData["Title"] = "Редагування ресурсу";
+    ViewData["Title"] = "Створення нового ресурсу";
 }
 
-<h1>Редагування ресурсу</h1>
+<h1>Створення нового ресурсу</h1>
 
 <div class="row">
     <div class="col-md-4">
@@ -86,9 +86,9 @@
 
             <input type="hidden" asp-for="Resource.Id" />
             <div class="form-group">
-                <input type="submit" value="Зберегти" class="btn btn-primary" />
-                <a asp-page="./Details" asp-route-id="@Model.Resource.Id" 
-                       type="submit" value="Скасувати" class="btn btn-secondary">Скасувати</a>
+                <input type="submit" value="Створити" class="btn btn-primary" />
+                <a asp-page="./Details" asp-route-id="@Model.Resource.Id"
+                   type="submit" value="Скасувати" class="btn btn-secondary">Скасувати</a>
             </div>
         </form>
 

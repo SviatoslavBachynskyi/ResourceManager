@@ -12,6 +12,8 @@ namespace ResourceManager.PageServices
 
         Task<IEnumerable<ResourceViewModel>> GetAllAsync(ResourceFilterViewModel resourceFilter = null);
 
+        Task<int> CreateAsync(ResourceViewModel resoruce);
+
         Task UpdateAsync(ResourceViewModel resoruce);
 
         Task DeleteAsync(int id);

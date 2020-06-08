@@ -60,6 +60,14 @@ namespace ResourceManager.Bll.Services
             return DtoModelMapping.Mapper.Map<IEnumerable<ResourceDto>>(resources);
         }
 
+        public async Task<int> CreateAsync(ResourceDto resourceDto)
+        {
+            var resouce = DtoModelMapping.Mapper.Map<Resource>(resourceDto);
+            this._unitOfWork.ResourceRepository.Add(resouce);
+            await this._unitOfWork.SaveChangesAsync();
+            return resouce.Id;
+        }
+
         public async Task UpdateAsync(ResourceDto resourceDto)
         {
             var resouce = DtoModelMapping.Mapper.Map<Resource>(resourceDto);

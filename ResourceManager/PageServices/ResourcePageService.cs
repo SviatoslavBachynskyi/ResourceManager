@@ -56,6 +56,15 @@ namespace ResourceManager.PageServices
             return this._mapper.Map<IEnumerable<ResourceViewModel>>(resources);
         }
 
+        public async Task<int> CreateAsync(ResourceViewModel resource)
+        {
+            var resourceDto = this._mapper.Map<ResourceDto>(resource);
+
+            var id = await this._resourceService.CreateAsync(resourceDto);
+
+            return id;
+        }
+
         public async Task UpdateAsync(ResourceViewModel resource)
         {
             var resourceDto = this._mapper.Map<ResourceDto>(resource);
