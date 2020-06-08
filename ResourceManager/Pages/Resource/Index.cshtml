@@ -111,6 +111,7 @@
             <th scope="col" class="align-middle">Підкатегорія</th>
             <th scope="col" class="align-middle">Клас безпеки</th>
             <th scope="col" class="align-middle">Клас екологічності</th>
+            <th scope="col" class="align-middle">Дії</th>
         </tr>
     </thead>
     <tbody>
@@ -123,6 +124,23 @@
                 <td class="align-middle">@resource.SubCategory</td>
                 <td class="align-middle">@resource.SafetyClass</td>
                 <td class="align-middle">@resource.EcologyClass</td>
+                <td class="align-middle text-nowrap">
+                    <a class="btn"
+                       asp-page="./Details"
+                       asp-route-id="@resource.Id">
+                        <i class="fa fa-info-circle" style="color:blue"></i>
+                    </a>
+                    <a class="btn"
+                       asp-page="./Edit"
+                       asp-route-id="@resource.Id">
+                        <i class="fa fa-edit" style="color:orange"></i>
+                    </a>
+                    <a class="btn"
+                       asp-page="./Delete"
+                       asp-route-id="@resource.Id">
+                        <i class="fa fa-times-circle" style="color:red"></i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

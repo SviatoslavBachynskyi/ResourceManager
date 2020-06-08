@@ -1,0 +1,72 @@
+﻿@page
+@model ResourceManager.DetailsModel
+@{
+    ViewData["Title"] = "Деталі для ресурсів";
+}
+
+<h1>Ресурс</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2 mb-2">
+            <b>Назва:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.Name)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Одиниця вимірювання:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.MeasuringUnit)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Категорія:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.Category)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Підкатегорія:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.SubCategory)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Опис:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.Description)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Клас безпеки:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.SafetyClass)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Екологічний клас:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.EcologyClass)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Чи потребує спеціальних дозволів:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.NeedLicense)
+        </dd>
+        <dt class="col-sm-2 mb-2">
+            <b>Термін зберігання:</b>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Resource.ShelfLife)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Resource">
+        <i class="fa fa-edit" style="color:orange"></i> Редагувати
+    </a>|
+    <a asp-page="./Index">Список ресурсів</a>
+</div>

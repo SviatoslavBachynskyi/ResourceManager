@@ -12,7 +12,7 @@ namespace ResourceManager
 {
     public class IndexModel : PageModel
     {
-        private IResourcePageService _resourcePageService;
+        private readonly IResourcePageService _resourcePageService;
 
         public IndexModel(IResourcePageService resourcePageService)
         {
@@ -33,9 +33,6 @@ namespace ResourceManager
 
         [BindProperty(SupportsGet = true)]
         public ResourceFilterViewModel Filter { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public int? CategoryId { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -70,14 +67,14 @@ namespace ResourceManager
                 nameof(SafetyClassSelectViewModel.CodeName));
         }
 
-        public async Task<ActionResult> OnGetSubCategoriesAsync()
+        public async Task<ActionResult> OnGetSubCategoriesAsync(int? categoryId)
         {
-            if (this.CategoryId == null)
+            if (categoryId == null)
             {
                 return this.BadRequest();
             }
 
-            var result = new JsonResult(await this._resourcePageService.GetSubCategoriesAsync(this.CategoryId.Value));
+            var result = new JsonResult(await this._resourcePageService.GetSubCategoriesAsync(categoryId.Value));
 
             return result;
         }

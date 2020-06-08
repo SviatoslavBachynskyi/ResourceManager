@@ -7,6 +7,8 @@ namespace ResourceManager.Core.Services
 {
     public interface IResourceService
     {
+        public Task<ResourceDto> GetByIdAsync(int Id);
+
         public Task<IEnumerable<ResourceDto>> GetAllAsync(ResourceFilterDto resourceFilter = null);
     }
 }

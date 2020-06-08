@@ -39,6 +39,13 @@ namespace ResourceManager.PageServices
             this._mapper = mapper;
         }
 
+        public async Task<ResourceViewModel> GetByIdAsync(int Id)
+        {
+            var resource = await this._resourceService.GetByIdAsync(Id);
+
+            return this._mapper.Map<ResourceViewModel>(resource);
+        }
+
         public async Task<IEnumerable<ResourceViewModel>> GetAllAsync(ResourceFilterViewModel resourceFilter = null)
         {
             var filter = this._mapper.Map<ResourceFilterDto>(resourceFilter);

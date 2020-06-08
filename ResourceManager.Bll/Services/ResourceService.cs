@@ -20,6 +20,13 @@ namespace ResourceManager.Bll.Services
             this._unitOfWork = unitOfWork;
         }
 
+        public async Task<ResourceDto> GetByIdAsync(int id)
+        {
+            var resource = await this._unitOfWork.ResourceRepository.GetByIdAsync(id);
+
+            return DtoModelMapping.Mapper.Map<ResourceDto>(resource);
+        }
+
         public async Task<IEnumerable<ResourceDto>> GetAllAsync(ResourceFilterDto resourceFilter = null)
         {
             IEnumerable<Resource> resources;
