@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ResourceManager.PageServices;
@@ -67,7 +67,7 @@ namespace ResourceManager
                 nameof(SafetyClassSelectViewModel.CodeName));
         }
 
-        public async Task<ActionResult> OnGetSubCategoriesAsync(int? categoryId)
+        public async Task<IActionResult> OnGetSubCategoriesAsync(int? categoryId)
         {
             if (categoryId == null)
             {

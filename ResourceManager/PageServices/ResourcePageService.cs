@@ -39,9 +39,9 @@ namespace ResourceManager.PageServices
             this._mapper = mapper;
         }
 
-        public async Task<ResourceViewModel> GetByIdAsync(int Id)
+        public async Task<ResourceViewModel> GetByIdAsync(int id)
         {
-            var resource = await this._resourceService.GetByIdAsync(Id);
+            var resource = await this._resourceService.GetByIdAsync(id);
 
             return this._mapper.Map<ResourceViewModel>(resource);
         }
@@ -53,6 +53,11 @@ namespace ResourceManager.PageServices
             var resources = await this._resourceService.GetAllAsync(filter);
 
             return this._mapper.Map<IEnumerable<ResourceViewModel>>(resources);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            await this._resourceService.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<MeasuringUnitSelectViewModel>> GetMeasuringUnitsAsync()

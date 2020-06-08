@@ -35,5 +35,16 @@ namespace ResourceManager
 
             return this.Page();
         }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
+            await this._resourcePageService.DeleteAsync(id.Value);
+            return this.RedirectToPage("./Index");
+        }
     }
 }

@@ -8,9 +8,11 @@ namespace ResourceManager.PageServices
 {
     public interface IResourcePageService
     {
-        Task<ResourceViewModel> GetByIdAsync(int Id);
+        Task<ResourceViewModel> GetByIdAsync(int id);
 
         Task<IEnumerable<ResourceViewModel>> GetAllAsync(ResourceFilterViewModel resourceFilter = null);
+
+        Task DeleteAsync(int id);
 
         Task<IEnumerable<MeasuringUnitSelectViewModel>> GetMeasuringUnitsAsync();
 
