@@ -9,11 +9,11 @@ using ResourceManager.ViewModels;
 
 namespace ResourceManager
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly IResourcePageService _resourcePageService;
 
-        public DetailsModel(IResourcePageService resourcePageService)
+        public DeleteModel(IResourcePageService resourcePageService)
         {
             this._resourcePageService = resourcePageService;
         }

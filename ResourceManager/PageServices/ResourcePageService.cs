@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using ResourceManager.ViewModels.SelectViewModels;
+using ResourceManager.Core.Dtos;
 
 namespace ResourceManager.PageServices
 {
@@ -53,6 +54,13 @@ namespace ResourceManager.PageServices
             var resources = await this._resourceService.GetAllAsync(filter);
 
             return this._mapper.Map<IEnumerable<ResourceViewModel>>(resources);
+        }
+
+        public async Task UpdateAsync(ResourceViewModel resource)
+        {
+            var resourceDto = this._mapper.Map<ResourceDto>(resource);
+
+            await this._resourceService.UpdateAsync(resourceDto);
         }
 
         public async Task DeleteAsync(int id)

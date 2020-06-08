@@ -1,0 +1,126 @@
+﻿@page
+@model ResourceManager.EditModel
+@{
+    ViewData["Title"] = "Деталі для ресурсів";
+}
+
+<h1>Редагування ресурсу</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Resource.Name" class="control-label"><b>Назва:</b></label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" asp-for="Resource.Name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.MeasuringUnitId" class="control-label"><b>Одиниця вимірювання:</b></label>
+                <div class="input-group mb-3">
+                    <select asp-for="Resource.MeasuringUnitId" class="form-control" asp-items="Model.MeasuringUnits">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.CategoryId" class="control-label"><b>Категорія:</b></label>
+                <div class="input-group mb-3">
+                    <select asp-for="Resource.CategoryId" class="form-control" asp-items="Model.Categories">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.SubCategoryId" class="control-label"><b>Підкатегорія:</b></label>
+                <div class="input-group mb-3">
+                    <select asp-for="Resource.SubCategoryId" class="form-control" asp-items="Model.SubCategories" disabled>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.EcologyClassId" class="control-label"><b>Клас екологічності:</b></label>
+                <div class="input-group mb-3">
+                    <select asp-for="Resource.EcologyClassId" class="form-control" asp-items="Model.EcologyClasses">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.SafetyClassId" class="control-label"><b>Клас безпеки:</b></label>
+                <div class="input-group mb-3">
+                    <select asp-for="Resource.SafetyClassId" class="form-control" asp-items="Model.SafetyClasses">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.Description" class="control-label"><b>Опис:</b></label>
+                <div class="input-group mb-3">
+                    <input class="form-control" asp-for="Resource.Description" />
+                </div>
+            </div>
+
+            <div class="form-group form-check">
+                <div class="input-group">
+                    <label asp-for="Resource.NeedLicense" class="form-check-label">
+                        <input class="form-check-input" asp-for="Resource.NeedLicense" />
+                        <b>Потребує ліцензію</b>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resource.ShelfLife" class="control-label"><b>Термін зберігання:</b></label>
+                <div class="input-group mb-3">
+                    <input class="form-control" asp-for="Resource.ShelfLife" />
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="Resource.Id" />
+            <div class="form-group">
+                <input type="submit" value="Зберегти" class="btn btn-primary" />
+                <a asp-page="./Details" asp-route-id="@Model.Resource.Id" 
+                       type="submit" value="Скасувати" class="btn btn-secondary">Скасувати</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        if (!$("#Resource_CategoryId").val()) {
+            $("#Resource_SubCategoryId").prop("disabled", true);
+        } else {
+            $("#Resource_SubCategoryId").prop("disabled", false)
+        }
+
+        $(function () {
+            $("#Resource_CategoryId").on("change", function () {
+                let categoryId = $(this).val();
+                $("#Resource_SubCategoryId").empty();
+                $("#Resource_SubCategoryId").append("<option value=''></option>");
+                if (!categoryId) {
+                    $("#Resource_SubCategoryId").prop("disabled", true);
+                    return;
+                }
+                $("#Resource_SubCategoryId").prop("disabled", false);
+
+                $.getJSON(`?handler=SubCategories&CategoryId=${categoryId}`, (data) => {
+                    $.each(data, function (i, item) {
+                        $("#Resource_SubCategoryId").append(`<option value="${item.id}">${item.name}</option>`);
+                    });
+                });
+            });
+        });
+    </script>
+}

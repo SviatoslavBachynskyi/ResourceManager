@@ -12,6 +12,7 @@ namespace ResourceManager.Bll.Mapping
                 .ForMember(dst => dst.MeasuringUnit, opt => opt.MapFrom(src => src.MeasuringUnit.Name))
                 .ForMember(dst => dst.Category, opt => opt.MapFrom(src => src.ResourceSubCategory.ResourceCategory.Name))
                 .ForMember(dst => dst.SubCategory, opt => opt.MapFrom(src => src.ResourceSubCategory.Name))
+                .ForMember(dst => dst.CategoryId, opt => opt.MapFrom(src => src.ResourceSubCategory.ResourceCategoryId))
                 .ForMember(dst => dst.SubCategoryId, opt => opt.MapFrom(src => src.ResourceSubCategoryId))
                 .ForMember(dst => dst.EcologyClass, opt => opt.MapFrom(src => src.EcologyClass.CodeName))
                 .ForMember(dst => dst.SafetyClass, opt => opt.MapFrom(src => src.SafetyClass.CodeName))

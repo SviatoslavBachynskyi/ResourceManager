@@ -1,5 +1,5 @@
 ﻿@page
-@model ResourceManager.DetailsModel
+@model ResourceManager.DeleteModel
 @{
     ViewData["Title"] = "Деталі для ресурсів";
 }
@@ -7,7 +7,7 @@
 <h1>Ресурс</h1>
 
 <div>
-    @await Html.PartialAsync("ResourceView", Model.Resource)
+    @await Html.PartialAsync("InfoView", Model.Resource)
 </div>
 
 <div>

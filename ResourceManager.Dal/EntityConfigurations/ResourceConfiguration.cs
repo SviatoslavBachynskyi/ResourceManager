@@ -20,6 +20,8 @@ namespace ResourceManager.Dal.EntityConfigurations
 
             builder.Property(e => e.ShelfLife).HasColumnType("datetime");
 
+            builder.Property(e => e.NeedLicense).HasDefaultValueSql("0");
+
             builder.HasOne(d => d.EcologyClass)
                 .WithMany()
                 .HasForeignKey(d => d.EcologyClassId)

@@ -30,12 +30,6 @@
         @Html.DisplayFor(model => model.SubCategory)
     </dd>
     <dt class="col-sm-2 mb-2">
-        <b>Опис:</b>
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Description)
-    </dd>
-    <dt class="col-sm-2 mb-2">
         <b>Клас безпеки:</b>
     </dt>
     <dd class="col-sm-10">
@@ -48,7 +42,13 @@
         @Html.DisplayFor(model => model.EcologyClass)
     </dd>
     <dt class="col-sm-2 mb-2">
-        <b>Чи потребує спеціальних дозволів:</b>
+        <b>Опис:</b>
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+    <dt class="col-sm-2 mb-2">
+        <b>Потребує ліцензію:</b>
     </dt>
     <dd class="col-sm-10">
         @Html.DisplayFor(model => model.NeedLicense)

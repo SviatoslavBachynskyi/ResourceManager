@@ -24,7 +24,9 @@ namespace ResourceManager.ViewModels
 
         public DateTime? ShelfLife { get; set; }
 
-        public bool? NeedLicense { get; set; }
+        public bool NeedLicense { get; set; }
+
+        public int? CategoryId { get; set; }
 
         public int? SubCategoryId { get; set; }
 
