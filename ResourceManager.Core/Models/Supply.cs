@@ -11,7 +11,7 @@ namespace ResourceManager.Core.Models
 
         public DateTime ArrivalDate { get; set; }
 
-        public int AcceptedById { get; set; }
+        public string AcceptedById { get; set; }
 
         public Worker AcceptedBy { get; set; }
 

@@ -8,11 +8,11 @@ namespace ResourceManager.Core.Models
 
         public DateTime RequestDate { get; set; }
 
-        public int TakenById { get; set; }
+        public string TakenById { get; set; }
 
         public int? InventoryGivingStatusId { get; set; }
 
-        public int ApprovedById { get; set; }
+        public string ApprovedById { get; set; }
 
         public int InventoryId { get; set; }
 

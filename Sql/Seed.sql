@@ -16,20 +16,20 @@ INSERT INTO Countries(Name) VALUES
 ('Україна');
 GO
 
-INSERT INTO Districts(Name, Countries_CountryId) SELECT 'Львівська' ,CountryId FROM Countries WHERE Name = 'Україна';
-INSERT INTO Districts(Name, Countries_CountryId) SELECT 'Харківська' ,CountryId FROM Countries WHERE Name = 'Україна';
-INSERT INTO Districts(Name, Countries_CountryId) SELECT 'Київська' ,CountryId FROM Countries WHERE Name = 'Україна';
-INSERT INTO Districts(Name, Countries_CountryId) SELECT 'Волинська' ,CountryId FROM Countries WHERE Name = 'Україна';
-INSERT INTO Districts(Name, Countries_CountryId) SELECT 'Одеська' ,CountryId FROM Countries WHERE Name = 'Україна';
-INSERT INTO Districts(Name, Countries_CountryId) SELECT 'Дніпропетровська' ,CountryId FROM Countries WHERE Name = 'Україна';
+INSERT INTO Districts(Name, CountryId) SELECT 'Львівська' ,Countries.Id FROM Countries WHERE Name = 'Україна';
+INSERT INTO Districts(Name, CountryId) SELECT 'Харківська' ,Countries.Id FROM Countries WHERE Name = 'Україна';
+INSERT INTO Districts(Name, CountryId) SELECT 'Київська' ,Countries.Id FROM Countries WHERE Name = 'Україна';
+INSERT INTO Districts(Name, CountryId) SELECT 'Волинська' ,Countries.Id FROM Countries WHERE Name = 'Україна';
+INSERT INTO Districts(Name, CountryId) SELECT 'Одеська' ,Countries.Id FROM Countries WHERE Name = 'Україна';
+INSERT INTO Districts(Name, CountryId) SELECT 'Дніпропетровська' ,Countries.Id FROM Countries WHERE Name = 'Україна';
 GO
  
-INSERT INTO Cities(Name, Districts_DistrictId) SELECT 'Львів', DistrictId FROM Districts WHERE Name = 'Львівська';
-INSERT INTO Cities(Name, Districts_DistrictId) SELECT 'Харків', DistrictId FROM Districts WHERE Name = 'Харківська';
-INSERT INTO Cities(Name, Districts_DistrictId) SELECT 'Київ', DistrictId FROM Districts WHERE Name = 'Київська';
-INSERT INTO Cities(Name, Districts_DistrictId) SELECT 'Луцьк', DistrictId FROM Districts WHERE Name = 'Волинська';
-INSERT INTO Cities(Name, Districts_DistrictId) SELECT 'Одеса', DistrictId FROM Districts WHERE Name = 'Одеська';
-INSERT INTO Cities(Name, Districts_DistrictId) SELECT 'Кривий Ріг', DistrictId FROM Districts WHERE Name = 'Дніпропетровська';
+INSERT INTO Cities(Name, DistrictId) SELECT 'Львів', Id FROM Districts WHERE Name = 'Львівська';
+INSERT INTO Cities(Name, DistrictId) SELECT 'Харків', Id FROM Districts WHERE Name = 'Харківська';
+INSERT INTO Cities(Name, DistrictId) SELECT 'Київ', Id FROM Districts WHERE Name = 'Київська';
+INSERT INTO Cities(Name, DistrictId) SELECT 'Луцьк', Id FROM Districts WHERE Name = 'Волинська';
+INSERT INTO Cities(Name, DistrictId) SELECT 'Одеса', Id FROM Districts WHERE Name = 'Одеська';
+INSERT INTO Cities(Name, DistrictId) SELECT 'Кривий Ріг', Id FROM Districts WHERE Name = 'Дніпропетровська';
 GO
 
 INSERT INTO Workers(FirstName, FatherName, LastName, Posts_PostId, Cities_CityId, Address)

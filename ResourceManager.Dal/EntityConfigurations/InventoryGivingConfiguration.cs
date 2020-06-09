@@ -15,6 +15,13 @@ namespace ResourceManager.Dal.EntityConfigurations
 
             builder.Property(e => e.Description).HasMaxLength(1000);
 
+            builder.Property(e => e.TakenById)
+                .IsRequired()
+                .HasMaxLength(450);
+
+            builder.Property(e => e.ApprovedById)
+                .HasMaxLength(450);
+
             builder.HasOne(d => d.ApprovedBy)
                 .WithMany()
                 .HasForeignKey(d => d.ApprovedById)

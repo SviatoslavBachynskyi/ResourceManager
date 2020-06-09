@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ResourceManager.Core;
+using ResourceManager.Core.Models;
 using ResourceManager.Core.Repositories;
 using ResourceManager.Dal;
 using ResourceManager.Dal.Repositories;
+using System;
 
 namespace ResourceManager.Injection
 {
@@ -24,7 +27,16 @@ namespace ResourceManager.Injection
         private static IServiceCollection AddContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ResourceManagerContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly(nameof(ResourceManager))
+               ));
+
+            services.AddDefaultIdentity<Worker>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ResourceManagerContext>()
+                ;
+
+            services.Configure<IdentityOptions>((options) => { configuration.GetSection("IdentityOptions").Bind(options); });
 
             return services;
         }
@@ -53,6 +65,22 @@ namespace ResourceManager.Injection
             services.AddScoped<IWorkerRepository, WorkerRepository>();
 
             return services;
+        }
+
+        public static IServiceProvider SeedEssentialData(this IServiceProvider provider)
+        {
+            var context = provider.GetRequiredService<ResourceManagerContext>();
+            var userManager = provider.GetRequiredService<UserManager<Worker>>();
+            var roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
+            var configuration = provider.GetRequiredService<IConfiguration>();
+
+            DataSeeder.SeedEssentialDataAsync(
+                context,
+                userManager,
+                roleManager,
+                configuration["AdminPassword"]).Wait();
+
+            return provider;
         }
     }
 }

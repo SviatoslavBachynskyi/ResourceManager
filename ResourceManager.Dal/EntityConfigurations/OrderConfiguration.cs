@@ -29,6 +29,13 @@ namespace ResourceManager.Dal.EntityConfigurations
 
             builder.Property(e => e.TotalPrice).HasColumnType("numeric(18, 2)");
 
+            builder.Property(e => e.OrderedById)
+                .IsRequired()
+                .HasMaxLength(450);
+
+            builder.Property(e => e.ApprovedById)
+                .HasMaxLength(450);
+
             builder.HasOne(d => d.OrderStatus)
                 .WithMany()
                 .HasForeignKey(d => d.OrderStatusId)

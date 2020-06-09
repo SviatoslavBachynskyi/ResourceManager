@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ResourceManager.Injection;
+using System;
 
 namespace ResourceManager
 {
@@ -34,7 +35,7 @@ namespace ResourceManager
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -52,7 +53,10 @@ namespace ResourceManager
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
+            serviceProvider.SeedEssentialData();
 
             app.UseEndpoints(endpoints => endpoints.MapRazorPages());
         }

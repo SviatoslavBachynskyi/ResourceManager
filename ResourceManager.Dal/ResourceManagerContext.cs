@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ResourceManager.Core.Models;
 using ResourceManager.Dal.EntityConfigurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ResourceManager.Dal
 {
-    public class ResourceManagerContext : DbContext
+    public class ResourceManagerContext : IdentityDbContext<Worker>
     {
         public ResourceManagerContext(DbContextOptions<ResourceManagerContext> options)
             : base(options)

@@ -23,9 +23,9 @@ namespace ResourceManager.Core.Models
 
         public int OrderStatusId { get; set; }
 
-        public int OrderedById { get; set; }
+        public string OrderedById { get; set; }
 
-        public int ApprovedById { get; set; }
+        public string ApprovedById { get; set; }
 
         public int SupplierId { get; set; }
 

@@ -17,6 +17,10 @@ namespace ResourceManager.Dal.EntityConfigurations
                 .HasMaxLength(30)
                 .IsUnicode(false);
 
+            builder.Property(e => e.AcceptedById)
+                .IsRequired()
+                .HasMaxLength(450);
+
             builder.HasOne(d => d.AcceptedBy)
                 .WithMany()
                 .HasForeignKey(d => d.AcceptedById)

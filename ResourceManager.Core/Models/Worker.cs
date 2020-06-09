@@ -1,9 +1,9 @@
-﻿namespace ResourceManager.Core.Models
-{
-    public class Worker : IEntity<int>
-    {
-        public int Id { get; set; }
+﻿using Microsoft.AspNetCore.Identity;
 
+namespace ResourceManager.Core.Models
+{
+    public class Worker : IdentityUser, IEntity<string>
+    {
         public string FirstName { get; set; }
 
         public string FatherName { get; set; }

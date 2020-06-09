@@ -2,7 +2,7 @@
 
 namespace ResourceManager.Core.Repositories
 {
-    public interface IWorkerRepository : IBaseRepository<Worker, int>
+    public interface IWorkerRepository : IBaseRepository<Worker, string>
     {
     }
 }
