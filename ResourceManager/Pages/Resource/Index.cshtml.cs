@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ResourceManager.Authorize;
+using ResourceManager.Core.Models;
 using ResourceManager.PageServices;
 using ResourceManager.ViewModels;
 using ResourceManager.ViewModels.FilterViewModels;
@@ -8,8 +10,9 @@ using ResourceManager.ViewModels.SelectViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ResourceManager
+namespace ResourceManager.Pages.Resource
 {
+    [AuthorizeRoles(Role.Admin)]
     public class IndexModel : PageModel
     {
         private readonly IResourcePageService _resourcePageService;

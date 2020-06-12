@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ResourceManager.Authorize;
+using ResourceManager.Core.Models;
 using ResourceManager.PageServices;
 using ResourceManager.ViewModels;
 using ResourceManager.ViewModels.SelectViewModels;
 using System.Threading.Tasks;
 
-namespace ResourceManager
+namespace ResourceManager.Pages.Resource
 {
-    [Authorize(Roles = "Admin")]
+    [AuthorizeRoles(Role.Admin)]
     public class CreateModel : PageModel
     {
         private readonly IResourcePageService _resourcePageService;
